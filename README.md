@@ -339,6 +339,19 @@ primitives touch. Playwright serves it from disk; device runs use
 each primitive behaves: change it whenever a primitive changes, and add a case
 there for any bug you fix.
 
+To release, bump the version and push the tag, then publish a GitHub release
+from it:
+
+```bash
+npm version minor        # or patch / major; commits and tags v<version>
+git push --follow-tags
+gh release create v0.2.0 --generate-notes
+```
+
+The release runs `.github/workflows/publish.yml`, which checks that the tag
+matches `package.json`, runs `npm run check` and the harness, and publishes
+to npm. A release marked as a prerelease publishes under the `next` tag.
+
 ## License
 
 [MIT](LICENSE)

@@ -1,0 +1,42 @@
+name: publish
+
+# Publishes to npm when a GitHub release is published. Uses npm trusted
+# publishing: npm accepts this workflow's OIDC token in place of an npm token,
+# and adds provenance. Configure it under the package's Settings → Trusted
+# Publisher on npmjs.com (repository ckalnet/ionic-e2e, workflow publish.yml).
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          registry-url: https://registry.npmjs.org
+      - name: Check the release tag matches package.json
+        run: |
+          version=$(node -p "require('./package.json').version")
+          if [ "${GITHUB_REF_NAME#v}" != "$version" ]; then
+            echo "::error::Release tag $GITHUB_REF_NAME doesn't match package.json version $version"
+            exit 1
+          fi
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium webkit
+      - run: npm run check
+      - run: npm test
+      # Trusted publishing needs npm 11.5.1 or later.
+      - run: npm install -g npm@11
+      # A prerelease goes to the `next` dist-tag, so `npm install ionic-e2e`
+      # keeps getting the latest stable version.
+      - run: npm publish ${{ github.event.release.prerelease && '--tag next' || '' }}

@@ -13,6 +13,14 @@
 	],
 	"license": "MIT",
 	"author": "ckal",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ckalnet/ionic-e2e.git"
+	},
+	"homepage": "https://github.com/ckalnet/ionic-e2e#readme",
+	"bugs": {
+		"url": "https://github.com/ckalnet/ionic-e2e/issues"
+	},
 	"type": "module",
 	"sideEffects": false,
 	"main": "./dist/cjs/index.js",
