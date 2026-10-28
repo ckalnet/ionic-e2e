@@ -1,0 +1,74 @@
+{
+	"name": "ionic-e2e",
+	"version": "0.1.0",
+	"description": "Test primitives for Ionic and Capacitor apps: fast mocked runs in Playwright, real-device runs through Appium.",
+	"keywords": [
+		"playwright",
+		"appium",
+		"webdriverio",
+		"ionic",
+		"capacitor",
+		"e2e",
+		"testing"
+	],
+	"license": "MIT",
+	"author": "ckal",
+	"type": "module",
+	"sideEffects": false,
+	"main": "./dist/cjs/index.js",
+	"module": "./dist/esm/index.js",
+	"types": "./dist/esm/index.d.ts",
+	"exports": {
+		".": {
+			"import": {
+				"types": "./dist/esm/index.d.ts",
+				"default": "./dist/esm/index.js"
+			},
+			"require": {
+				"types": "./dist/cjs/index.d.ts",
+				"default": "./dist/cjs/index.js"
+			}
+		},
+		"./package.json": "./package.json"
+	},
+	"files": [
+		"dist",
+		"src"
+	],
+	"scripts": {
+		"build": "node scripts/build.mjs",
+		"prepare": "npm run build",
+		"typecheck": "tsc --noEmit",
+		"lint": "eslint .",
+		"test": "playwright test",
+		"test:ui": "playwright test --ui",
+		"report": "playwright show-report",
+		"check": "npm run typecheck && npm run lint && npm run build",
+		"test:appium": "playwright test -c playwright.appium.config.ts"
+	},
+	"peerDependencies": {
+		"@playwright/test": ">=1.51.0",
+		"webdriverio": ">=10.0.0"
+	},
+	"engines": {
+		"node": ">=20"
+	},
+	"devDependencies": {
+		"@ionic/core": "9.0.9",
+		"@ionic/core-8": "npm:@ionic/core@8.8.19",
+		"@playwright/test": "1.64.1",
+		"@types/node": "24.19.2",
+		"appium": "3.9.0",
+		"appium-uiautomator2-driver": "8.7.3",
+		"appium-xcuitest-driver": "12.22.0",
+		"eslint": "10.13.0",
+		"typescript": "6.0.3",
+		"typescript-eslint": "8.72.1",
+		"webdriverio": "10.1.0"
+	},
+	"peerDependenciesMeta": {
+		"webdriverio": {
+			"optional": true
+		}
+	}
+}

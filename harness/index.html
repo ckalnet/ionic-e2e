@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+		<title>ionic-e2e harness</title>
+		<link rel="stylesheet" href="/ionic-css/ionic.bundle.css" />
+		<script>
+			// The harness fixture swaps the mode per Playwright project.
+			window.Ionic = { config: { mode: 'md' } };
+		</script>
+		<script type="module" src="/ionic/ionic.esm.js"></script>
+		<script type="module" src="/harness.js"></script>
+	</head>
+	<body>
+		<ion-app>
+			<ion-nav root="harness-home"></ion-nav>
+		</ion-app>
+	</body>
+</html>
