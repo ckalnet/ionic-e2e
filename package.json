@@ -1,6 +1,6 @@
 {
 	"name": "ionic-e2e",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Test primitives for Ionic and Capacitor apps: fast mocked runs in Playwright, real-device runs through Appium.",
 	"keywords": [
 		"playwright",
